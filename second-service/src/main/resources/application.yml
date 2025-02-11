@@ -1,11 +1,13 @@
 spring:
   application:
-    name: second-service
+    name: my-second-service
 
 server:
-  port: 8082
+  port: 0
 
 eureka:
   client:
-    fetch-registry: false
-    register-with-eureka: false
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
