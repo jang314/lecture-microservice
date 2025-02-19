@@ -55,8 +55,9 @@ public class WebSecurity {
         http.csrf(AbstractHttpConfigurer::disable)
                 .headers((headers) -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers(new AntPathRequestMatcher("/**"))
-                .access(this::hasIpAddress)
+                        .requestMatchers(new AntPathRequestMatcher("/actuator/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/**"))
+                        .access(this::hasIpAddress)
                         .anyRequest()
                 .authenticated()).addFilter(getAuthenticationFilter(authenticationManager));
 
