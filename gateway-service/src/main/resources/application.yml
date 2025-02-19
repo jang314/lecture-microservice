@@ -78,5 +78,20 @@ spring:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<path>.*), /$\{path}
             - AuthorizationHeaderFilter
-token:
-  secret: user_token
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/actuator/**
+            - Method=GET,POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<path>.*), /$\{path}
+#token:
+#  secret: user_token
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans
