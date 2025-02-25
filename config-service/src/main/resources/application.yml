@@ -10,8 +10,20 @@ spring:
     config:
       server:
         native:
-          search-locations: file:///D:/${user.home}/git/msa/native-file-repo
+          # search-locations: file:///${user.home}/native-file-repo
+          search-locations: file:///D:/git/msa/native-file-repo
         git:
 #          uri: file://D:\git\msa\git-local-repo
           uri: https://github.com/jang314/lecture-microservice.git
           defaultLabel: master
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, httptrace, busrefresh
